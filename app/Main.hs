@@ -109,18 +109,23 @@ main = do
     cellText <- Gtk.cellRendererTextNew
 
     -- Creamos las columnas
-    tvcol <- Gtk.treeViewColumnNew
+    tvcol1 <- Gtk.treeViewColumnNew
+    tvcol2 <- Gtk.treeViewColumnNew
 
+    -- Titulos de las columnas
+    set tvcol1 [#title := "Indice"]
+    set tvcol2 [#title := "Texto"]
     -- Aniadimos los renderers a las columnas
-    Gtk.treeViewColumnPackStart tvcol cellInt True
-    Gtk.treeViewColumnPackStart tvcol cellText True
+    Gtk.treeViewColumnPackStart tvcol1 cellInt True
+    Gtk.treeViewColumnPackStart tvcol2 cellText True
     
     -- Le decimos a que propiedad vamos a enlazar el modelo
-    Gtk.treeViewColumnAddAttribute tvcol cellInt "text" 0
-    Gtk.treeViewColumnAddAttribute tvcol cellText "text" 1
+    Gtk.treeViewColumnAddAttribute tvcol1 cellInt "text" 0
+    Gtk.treeViewColumnAddAttribute tvcol2 cellText "text" 1
     
     -- Aniadimos la columna a la Lista
-    Gtk.treeViewAppendColumn listbox tvcol
+    Gtk.treeViewAppendColumn listbox tvcol1
+    Gtk.treeViewAppendColumn listbox tvcol2
     
     -- Asignamos los modelos
     set combobox [#model := comboModel]
